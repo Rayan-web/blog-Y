@@ -12,6 +12,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
+import { setDoc } from "firebase/firestore";
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -31,6 +32,7 @@ export const AuthContextProvider = ({ children }) => {
   const logout = () => {
     return signOut(auth);
   };
+
   return (
     <UserContext.Provider value={{ createUser, loginUser, user, logout }}>
       {children}

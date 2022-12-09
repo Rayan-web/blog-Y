@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
+import { Link, useNavigate, NavLink, Outlet } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
-
+import "../index.css";
 function Navbar() {
+  const navigate = useNavigate();
   const { user, logout } = UserAuth();
 
   const logoutuser = async () => {
     try {
       await logout();
-      toast("Here is your toast.");
-
-      Navigate("/");
+      navigate("/");
+      // toast.success("Here is your toast.");
     } catch (error) {
       console.log(error);
     }
@@ -109,7 +109,9 @@ function Navbar() {
                 <NavLink to="/create">Create Post</NavLink>
               </li>
               <li className="flex items-center cursor-pointer  ">
-                {<h1>{user && user.email}</h1>}
+                <h1 className=" hidden lg:block md:block ">
+                  {user && user.email}
+                </h1>
                 <svg
                   class="w-6 h-6 ml-2"
                   fill="#CF22C8"

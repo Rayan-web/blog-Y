@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { UserAuth } from "../context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 function Login() {
   const { createUser } = UserAuth();
   const [newUserEmail, setNewuserEmail] = useState("");
@@ -13,6 +14,7 @@ function Login() {
       await createUser(newUserEmail, newUserPass);
       console.log(createUser);
       navigate("/");
+      toast.success("You are member now");
     } catch (error) {
       console.log(error);
     }

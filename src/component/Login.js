@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { UserAuth } from "../context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 function Login() {
   const { loginUser } = UserAuth();
   const navigate = useNavigate();
@@ -12,63 +13,18 @@ function Login() {
   const Login = async () => {
     try {
       await loginUser(userEmail, userPass);
+
+      toast.success("Welcome back");
       navigate("/");
     } catch (error) {
       console.log(error);
+      // toast.error(error);
     }
   };
 
   return (
-    // <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-    //   <div class="mb-4">
-    //     <label
-    //       class="block text-grey-darker text-sm font-bold mb-2"
-    //       for="username"
-    //     >
-    //       Username
-    //     </label>
-    //     <input
-    //       class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-    //       id="username"
-    //       type="text"
-    //       placeholder="Username"
-    //       onChange={(e) => setUserEmail(e.target.value)}
-    //     />
-    //   </div>
-    //   <div class="mb-6">
-    //     <label
-    //       class="block text-grey-darker text-sm font-bold mb-2"
-    //       for="password"
-    //     >
-    //       Password
-    //     </label>
-    //     <input
-    //       class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
-    //       id="password"
-    //       type="password"
-    //       placeholder="******************"
-    //       onChange={(e) => setUserPass(e.target.value)}
-    //     />
-    //     <p class="text-red text-xs italic">Please choose a password.</p>
-    //   </div>
-    //   <div class="flex items-center justify-between">
-    //     <button
-    //       class="bg-blue bg-red-300 text-white font-bold py-2 px-4 rounded"
-    //       type="button"
-    //       onClick={Login}
-    //     >
-    //       Sign In
-    //     </button>
-    //     <a
-    //       class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
-    //       href="#"
-    //     >
-    //       <Link to="/register">Register</Link>
-    //     </a>
-    //   </div>
-    // </div>
-    // Here
     <div class="min-h-screen flex flex-col items-center justify-center bg-gray-300">
+      {/* <Toaster /> */}
       <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
         <div class="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">
           Login To Your Account
